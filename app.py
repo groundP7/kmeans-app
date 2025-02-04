@@ -42,6 +42,7 @@ def main() :
                 print(column + ' : float')
                 df_new[column] = df[column]
             elif is_object_dtype(df[column]) :
+                print(column + ' : object')
                 if df[column].nunique() <= 2 :
                     # 레이블 인코딩
                     encoder = LabelEncoder()
