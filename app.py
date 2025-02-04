@@ -15,13 +15,20 @@ elif platform.system() == 'Linux':
     plt.rcParams['font.family'] = 'NanumGothic'
 
 
-@st.cache_data
+@st.cache_resource
 def fontRegistered():
     font_dirs = [os.getcwd() + '/custom_fonts']
     font_files = fm.findSystemFonts(fontpaths=font_dirs)
     for font_file in font_files:
         fm.fontManager.addfont(font_file)
     fm._load_fontmanager(try_read_cache=False)
+    if platform.system() == 'Windows':
+        plt.rcParams['font.family'] = 'Malgun Gothic'
+    elif platform.system() == 'Linux':
+        plt.rcParams['font.family'] = 'NanumGothic'
+    else:  # Mac
+        plt.rcParams['font.family'] = 'AppleGothic'
+    plt.rcParams['axes.unicode_minus'] = False
 
 
 plt.rcParams['axes.unicode_minus'] = False
@@ -102,7 +109,7 @@ def main() :
         fig1 = plt.figure()
         plt.plot(range(1, max_k+1), wcss)
         plt.title("The Elbow Method")
-        plt.xlabel("# df Clusters")
+        plt.xlabel("클러스터의 수")
         plt.ylabel("WCSS 값")
         st.pyplot(fig1)
 
