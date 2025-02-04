@@ -5,7 +5,8 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
-
+import os
+import matplotlib.font_manager as fm
 import platform
 
 if platform.system() == 'Windows':
@@ -13,8 +14,6 @@ if platform.system() == 'Windows':
 elif platform.system() == 'Linux':
     plt.rcParams['font.family'] = 'NanumGothic'
 
-import os
-import matplotlib.font_manager as fm
 
 @st.cache_data
 def fontRegistered():
