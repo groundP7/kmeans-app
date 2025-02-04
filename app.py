@@ -77,6 +77,9 @@ def main() :
 
         fig1 = plt.figure()
         plt.plot(range(1, max_k+1), wcss)
+        plt.title("The Elbow Method")
+        plt.xlabel("# df Clusters")
+        plt.ylabel("WCSS")
         st.pyplot(fig1)
 
         st.text("원하는 클러스터링(그룹) 갯수를 입력하세요")
