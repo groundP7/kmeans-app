@@ -6,7 +6,32 @@ from sklearn.compose import ColumnTransformer
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
+import platform
+
+if platform.system() == 'Windows':
+    plt.rcParams['font.family'] = 'Malgun Gothic'
+elif platform.system() == 'Linux':
+    plt.rcParams['font.family'] = 'NanumGothic'
+
+import os
+import matplotlib.font_manager as fm
+
+@st.cache_data
+def fontRegistered():
+    font_dirs = [os.getcwd() + '/custom_fonts']
+    font_files = fm.findSystemFonts(fontpaths=font_dirs)
+    for font_file in font_files:
+        fm.fontManager.addfont(font_file)
+    fm._load_fontmanager(try_read_cache=False)
+
+
+plt.rcParams['axes.unicode_minus'] = False
+
 def main() :
+
+    fontRegistered()
+    plt.rc('font', family='NanumGothic')
+
     st.title("K-Means Clustering App")
 
     # 1. csv file upload
@@ -79,7 +104,7 @@ def main() :
         plt.plot(range(1, max_k+1), wcss)
         plt.title("The Elbow Method")
         plt.xlabel("# df Clusters")
-        plt.ylabel("WCSS")
+        plt.ylabel("WCSS 값")
         st.pyplot(fig1)
 
         st.text("원하는 클러스터링(그룹) 갯수를 입력하세요")
